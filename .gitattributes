@@ -1,0 +1,3 @@
+# Deterministic line endings everywhere — the index freshness check (build-index --check)
+# does a byte comparison, so checkouts must match what the tooling writes (LF).
+* text=auto eol=lf

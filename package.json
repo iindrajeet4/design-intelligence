@@ -1,0 +1,19 @@
+{
+  "name": "design-intelligence",
+  "version": "0.1.0",
+  "description": "An open-source Design Intelligence Layer for AI coding agents — a queryable design brain, not documentation.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/iindrajeet4/design-intelligence",
+  "repository": { "type": "git", "url": "https://github.com/iindrajeet4/design-intelligence.git" },
+  "bin": { "di": "tools/di.mjs" },
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "validate": "node tools/di.mjs validate",
+    "build-index": "node tools/di.mjs build-index",
+    "check": "node tools/di.mjs validate && node tools/di.mjs build-index --check"
+  },
+  "keywords": ["design-system", "ai-agents", "claude-code", "agent-skills", "design-tokens", "accessibility", "ux"],
+  "files": ["schemas", "skills", "knowledge", "engine", "index", "context", "tools", "CLAUDE.md"],
+  "dependencies": {}
+}

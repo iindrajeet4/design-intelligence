@@ -1,0 +1,751 @@
+{
+  "schemaVersion": "0.1",
+  "stats": {
+    "skills": 18,
+    "knowledge": 13
+  },
+  "skills": [
+    {
+      "id": "accessibility.accessibility-foundations",
+      "name": "accessibility-foundations",
+      "category": "accessibility",
+      "description": "The baseline accessibility every interface must meet — semantic HTML, visible focus, labelled controls, sufficient contrast, keyboard operability, and adequate touch targets. Treat as a hard constraint, not an enhancement.",
+      "priority": "high",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "marketing",
+        "dashboard"
+      ],
+      "tags": [
+        "accessibility",
+        "wcag",
+        "keyboard",
+        "focus",
+        "contrast",
+        "aria"
+      ],
+      "knowledge": [
+        "rules.interactive-has-focus-state",
+        "rules.form-controls-have-labels",
+        "rules.contrast-meets-wcag-aa",
+        "rules.touch-target-min-size"
+      ],
+      "path": "skills/core/accessibility/accessibility-foundations/SKILL.md"
+    },
+    {
+      "id": "color.color-system",
+      "name": "color-system",
+      "category": "color",
+      "description": "Build a semantic, token-based colour system that is accessible in light and dark themes, with a chosen neutral and an accent kept separate from status colours.",
+      "priority": "high",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "marketing",
+        "dashboard"
+      ],
+      "tags": [
+        "color",
+        "tokens",
+        "contrast",
+        "theming",
+        "dark-mode"
+      ],
+      "knowledge": [
+        "rules.contrast-meets-wcag-aa"
+      ],
+      "path": "skills/core/color/color-system/SKILL.md"
+    },
+    {
+      "id": "dashboard.dashboard-design",
+      "name": "dashboard-design",
+      "category": "dashboard",
+      "description": "Design dashboards that answer questions, not just display data — summary before detail, state encoded in form, a clear scan path, and progressive depth via drill-down.",
+      "priority": "high",
+      "complexity": "advanced",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "enterprise",
+        "dashboard",
+        "analytics"
+      ],
+      "tags": [
+        "dashboard",
+        "data-viz",
+        "information-density",
+        "analytics"
+      ],
+      "knowledge": [
+        "decisions.sidebar-when-frequent-switching",
+        "principles.hierarchy-reflects-priority",
+        "patterns.progressive-disclosure"
+      ],
+      "path": "skills/core/dashboard/dashboard-design/SKILL.md"
+    },
+    {
+      "id": "data-tables.accessible-data-tables",
+      "name": "accessible-data-tables",
+      "category": "data-tables",
+      "description": "Present tabular data so it is scannable and operable — real table semantics, aligned columns, sensible density, sorting/filtering, and responsible responsive behaviour.",
+      "priority": "high",
+      "complexity": "advanced",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "enterprise",
+        "dashboard",
+        "admin"
+      ],
+      "tags": [
+        "tables",
+        "data",
+        "density",
+        "sorting",
+        "accessibility"
+      ],
+      "knowledge": [
+        "rules.interactive-has-focus-state",
+        "patterns.progressive-disclosure"
+      ],
+      "path": "skills/core/data-tables/accessible-data-tables/SKILL.md"
+    },
+    {
+      "id": "engine.decision-engine",
+      "name": "decision-engine",
+      "category": "engine",
+      "description": "The contextual design decision procedure — turn a project context into ranked, explained design recommendations with reasoning, confidence, tradeoffs, and alternatives. Run before implementing any interface.",
+      "priority": "high",
+      "complexity": "advanced",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "marketing",
+        "dashboard"
+      ],
+      "tags": [
+        "engine",
+        "decisions",
+        "context",
+        "reasoning"
+      ],
+      "knowledge": [
+        "decisions.sidebar-when-frequent-switching",
+        "decisions.editorial-when-emotional",
+        "patterns.progressive-disclosure"
+      ],
+      "path": "engine/decision-engine/SKILL.md"
+    },
+    {
+      "id": "engine.review-engine",
+      "name": "review-engine",
+      "category": "engine",
+      "description": "The structured design review procedure — score an implemented interface across UX, UI, accessibility, responsive, performance, and product dimensions, then drive the critique loop until quality holds. Run after implementing any interface.",
+      "priority": "high",
+      "complexity": "advanced",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "marketing",
+        "dashboard"
+      ],
+      "tags": [
+        "engine",
+        "review",
+        "critique",
+        "accessibility",
+        "quality"
+      ],
+      "knowledge": [
+        "heuristics.primary-action-distinct",
+        "rules.contrast-meets-wcag-aa",
+        "rules.interactive-has-focus-state",
+        "rules.form-controls-have-labels"
+      ],
+      "path": "engine/review-engine/SKILL.md"
+    },
+    {
+      "id": "engine.system-generator",
+      "name": "system-generator",
+      "category": "engine",
+      "description": "The design system generation procedure — derive tokens (primitive → semantic → component), type scale, spacing, and component rules from the decision engine's output, with a written rationale for every token.",
+      "priority": "high",
+      "complexity": "advanced",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "marketing",
+        "dashboard"
+      ],
+      "tags": [
+        "engine",
+        "tokens",
+        "design-system",
+        "theming"
+      ],
+      "knowledge": [
+        "rules.contrast-meets-wcag-aa",
+        "principles.consistency-reduces-load"
+      ],
+      "path": "engine/system-generator/SKILL.md"
+    },
+    {
+      "id": "forms.accessible-form-design",
+      "name": "accessible-form-design",
+      "category": "forms",
+      "description": "Design forms that are usable, forgiving, and accessible — clear labels, helpful inline validation, associated errors, logical focus order, and a recoverable submit.",
+      "priority": "high",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise"
+      ],
+      "tags": [
+        "forms",
+        "accessibility",
+        "validation",
+        "ux",
+        "usability"
+      ],
+      "knowledge": [
+        "rules.form-controls-have-labels",
+        "patterns.inline-validation",
+        "rules.interactive-has-focus-state"
+      ],
+      "path": "skills/core/forms/accessible-form-design/SKILL.md"
+    },
+    {
+      "id": "hierarchy.visual-hierarchy",
+      "name": "visual-hierarchy",
+      "category": "hierarchy",
+      "description": "Build a clear visual hierarchy so users find what matters at a glance — using size, weight, colour, and spacing to encode priority rather than decoration.",
+      "priority": "high",
+      "complexity": "basic",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "marketing",
+        "dashboard"
+      ],
+      "tags": [
+        "hierarchy",
+        "layout",
+        "typography",
+        "emphasis"
+      ],
+      "knowledge": [
+        "principles.hierarchy-reflects-priority",
+        "heuristics.primary-action-distinct"
+      ],
+      "path": "skills/core/hierarchy/visual-hierarchy/SKILL.md"
+    },
+    {
+      "id": "layout.layout-foundations",
+      "name": "layout-foundations",
+      "category": "layout",
+      "description": "Compose layouts on a grid with intentional alignment and rhythm, so structure reads clearly and content has room to breathe across breakpoints.",
+      "priority": "high",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "marketing",
+        "dashboard"
+      ],
+      "tags": [
+        "layout",
+        "grid",
+        "alignment",
+        "structure"
+      ],
+      "knowledge": [
+        "principles.hierarchy-reflects-priority",
+        "principles.consistency-reduces-load"
+      ],
+      "path": "skills/core/layout/layout-foundations/SKILL.md"
+    },
+    {
+      "id": "navigation.navigation-patterns",
+      "name": "navigation-patterns",
+      "category": "navigation",
+      "description": "Choose and structure navigation to match how often users switch contexts — sidebar for many frequently-visited sections, top nav for few, with clear current-location cues.",
+      "priority": "high",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "enterprise",
+        "dashboard",
+        "ecommerce",
+        "marketing"
+      ],
+      "tags": [
+        "navigation",
+        "sidebar",
+        "information-architecture",
+        "wayfinding"
+      ],
+      "knowledge": [
+        "decisions.sidebar-when-frequent-switching"
+      ],
+      "path": "skills/core/navigation/navigation-patterns/SKILL.md"
+    },
+    {
+      "id": "principles.design-principles",
+      "name": "design-principles",
+      "category": "principles",
+      "description": "The foundational design principles an agent should apply to every interface — hierarchy reflects priority, clarity beats decoration, and consistency reduces load. Start here before any UI work.",
+      "priority": "high",
+      "complexity": "basic",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "marketing",
+        "dashboard"
+      ],
+      "tags": [
+        "principles",
+        "foundations",
+        "hierarchy",
+        "clarity",
+        "consistency"
+      ],
+      "knowledge": [
+        "principles.hierarchy-reflects-priority",
+        "principles.clarity-over-decoration",
+        "principles.consistency-reduces-load"
+      ],
+      "path": "skills/core/principles/design-principles/SKILL.md"
+    },
+    {
+      "id": "responsive.responsive-design",
+      "name": "responsive-design",
+      "category": "responsive",
+      "description": "Design layouts that adapt across mobile, tablet, and desktop by prioritising content and using progressive disclosure — never by cramming a desktop layout onto a phone.",
+      "priority": "high",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "marketing",
+        "dashboard"
+      ],
+      "tags": [
+        "responsive",
+        "mobile",
+        "breakpoints",
+        "progressive-disclosure"
+      ],
+      "knowledge": [
+        "patterns.progressive-disclosure",
+        "rules.touch-target-min-size"
+      ],
+      "path": "skills/core/responsive/responsive-design/SKILL.md"
+    },
+    {
+      "id": "spacing.spacing-system",
+      "name": "spacing-system",
+      "category": "spacing",
+      "description": "Use a consistent spacing scale and let layout containers own the gaps, producing even rhythm and grouping that communicates structure.",
+      "priority": "medium",
+      "complexity": "basic",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "marketing",
+        "dashboard"
+      ],
+      "tags": [
+        "spacing",
+        "rhythm",
+        "tokens",
+        "layout"
+      ],
+      "knowledge": [
+        "principles.consistency-reduces-load"
+      ],
+      "path": "skills/core/spacing/spacing-system/SKILL.md"
+    },
+    {
+      "id": "states.empty-states",
+      "name": "empty-states",
+      "category": "states",
+      "description": "Turn empty screens into onboarding moments — explain what belongs here and give a clear first action, distinguishing \"nothing yet\" from \"no results\" and \"error\".",
+      "priority": "medium",
+      "complexity": "basic",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "dashboard"
+      ],
+      "tags": [
+        "states",
+        "empty",
+        "onboarding",
+        "first-run"
+      ],
+      "knowledge": [
+        "principles.hierarchy-reflects-priority"
+      ],
+      "path": "skills/core/states/empty-states/SKILL.md"
+    },
+    {
+      "id": "states.error-states",
+      "name": "error-states",
+      "category": "states",
+      "description": "Handle errors with recovery in mind — say what went wrong in plain language, why, and how to fix it, at the right level, without blame or dead ends.",
+      "priority": "high",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "dashboard"
+      ],
+      "tags": [
+        "states",
+        "errors",
+        "recovery",
+        "messaging"
+      ],
+      "knowledge": [
+        "patterns.inline-validation"
+      ],
+      "path": "skills/core/states/error-states/SKILL.md"
+    },
+    {
+      "id": "states.loading-states",
+      "name": "loading-states",
+      "category": "states",
+      "description": "Communicate progress honestly during waits — skeletons for structured content, spinners for short indeterminate waits — while preserving layout and avoiding jank.",
+      "priority": "medium",
+      "complexity": "basic",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "dashboard"
+      ],
+      "tags": [
+        "states",
+        "loading",
+        "skeleton",
+        "perceived-performance"
+      ],
+      "knowledge": [
+        "principles.clarity-over-decoration"
+      ],
+      "path": "skills/core/states/loading-states/SKILL.md"
+    },
+    {
+      "id": "typography.typography-system",
+      "name": "typography-system",
+      "category": "typography",
+      "description": "Establish a type system — a modular scale, deliberate weights, and readable measures — that carries hierarchy and personality without relying on decoration.",
+      "priority": "high",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "marketing"
+      ],
+      "tags": [
+        "typography",
+        "type-scale",
+        "readability",
+        "hierarchy"
+      ],
+      "knowledge": [
+        "principles.hierarchy-reflects-priority",
+        "rules.contrast-meets-wcag-aa"
+      ],
+      "path": "skills/core/typography/typography-system/SKILL.md"
+    }
+  ],
+  "knowledge": [
+    {
+      "id": "anti-patterns.modal-for-everything",
+      "type": "anti-pattern",
+      "name": "A modal for every interaction",
+      "summary": "Reaching for a modal dialog as the default container traps focus, breaks flow, stacks poorly, and fails on small screens.",
+      "status": "stable",
+      "tags": [
+        "modals",
+        "navigation",
+        "mobile"
+      ],
+      "path": "knowledge/anti-patterns/modal-for-everything.md"
+    },
+    {
+      "id": "decisions.editorial-when-emotional",
+      "type": "decision",
+      "name": "Use an editorial visual language when emotion and brand lead",
+      "summary": "When the product's job is to make people feel and trust — luxury, lifestyle, storytelling — favour editorial layout over utilitarian density.",
+      "status": "stable",
+      "tags": [
+        "visual-language",
+        "brand",
+        "ecommerce"
+      ],
+      "path": "knowledge/decisions/editorial-when-emotional.md"
+    },
+    {
+      "id": "decisions.sidebar-when-frequent-switching",
+      "type": "decision",
+      "name": "Use sidebar navigation for frequent section switching",
+      "summary": "When users move often between many top-level areas, a persistent sidebar keeps destinations visible and switching cheap; a top nav suits few destinations.",
+      "status": "stable",
+      "tags": [
+        "navigation",
+        "layout",
+        "dashboard"
+      ],
+      "path": "knowledge/decisions/sidebar-when-frequent-switching.md"
+    },
+    {
+      "id": "heuristics.primary-action-distinct",
+      "type": "heuristic",
+      "name": "The primary action is visually distinct",
+      "summary": "On any view, the single most important action should be immediately distinguishable from secondary and tertiary actions.",
+      "status": "stable",
+      "tags": [
+        "review",
+        "hierarchy",
+        "actions"
+      ],
+      "path": "knowledge/heuristics/primary-action-distinct.md"
+    },
+    {
+      "id": "patterns.inline-validation",
+      "type": "pattern",
+      "name": "Inline form validation",
+      "summary": "Validate and give feedback close to each field at the right moment, so users fix problems as they go rather than at a wall of errors on submit.",
+      "status": "stable",
+      "tags": [
+        "forms",
+        "feedback",
+        "ux"
+      ],
+      "path": "knowledge/patterns/inline-validation.md"
+    },
+    {
+      "id": "patterns.progressive-disclosure",
+      "type": "pattern",
+      "name": "Progressive disclosure",
+      "summary": "Show the few things most users need now; reveal advanced or secondary detail on demand, so complexity is available without being imposed.",
+      "status": "stable",
+      "tags": [
+        "complexity",
+        "mobile",
+        "forms",
+        "navigation"
+      ],
+      "path": "knowledge/patterns/progressive-disclosure.md"
+    },
+    {
+      "id": "principles.clarity-over-decoration",
+      "type": "principle",
+      "name": "Clarity beats decoration",
+      "summary": "Visual effects must earn their place by improving comprehension; ornament that adds cognitive load without meaning is a cost, not a feature.",
+      "status": "stable",
+      "tags": [
+        "clarity",
+        "restraint",
+        "foundations"
+      ],
+      "path": "knowledge/principles/clarity-over-decoration.md"
+    },
+    {
+      "id": "principles.consistency-reduces-load",
+      "type": "principle",
+      "name": "Consistency reduces cognitive load",
+      "summary": "Reusing the same patterns, spacing, and language across an interface lets users transfer what they learned once to everywhere else.",
+      "status": "stable",
+      "tags": [
+        "consistency",
+        "systems",
+        "foundations"
+      ],
+      "path": "knowledge/principles/consistency-reduces-load.md"
+    },
+    {
+      "id": "principles.hierarchy-reflects-priority",
+      "type": "principle",
+      "name": "Visual hierarchy should reflect user priority",
+      "summary": "The most important thing for the user should be the most prominent thing on the screen; visual weight is a budget spent on what matters most.",
+      "status": "stable",
+      "tags": [
+        "hierarchy",
+        "layout",
+        "foundations"
+      ],
+      "path": "knowledge/principles/hierarchy-reflects-priority.md"
+    },
+    {
+      "id": "rules.contrast-meets-wcag-aa",
+      "type": "rule",
+      "name": "Text contrast meets WCAG AA",
+      "summary": "Body text needs a contrast ratio of at least 4.5:1 against its background (3:1 for large text and meaningful UI components), in every theme.",
+      "status": "stable",
+      "tags": [
+        "accessibility",
+        "color",
+        "contrast"
+      ],
+      "path": "knowledge/rules/contrast-meets-wcag-aa.md"
+    },
+    {
+      "id": "rules.form-controls-have-labels",
+      "type": "rule",
+      "name": "Every form control has a programmatic label",
+      "summary": "Inputs, selects, and textareas must have an associated label that assistive technology can announce — placeholder text is not a label.",
+      "status": "stable",
+      "tags": [
+        "accessibility",
+        "forms",
+        "labels"
+      ],
+      "path": "knowledge/rules/form-controls-have-labels.md"
+    },
+    {
+      "id": "rules.interactive-has-focus-state",
+      "type": "rule",
+      "name": "Every interactive element has a visible focus state",
+      "summary": "Anything a keyboard can reach must show a clearly visible focus indicator, so keyboard and switch users can always see where they are.",
+      "status": "stable",
+      "tags": [
+        "accessibility",
+        "keyboard",
+        "focus"
+      ],
+      "path": "knowledge/rules/interactive-has-focus-state.md"
+    },
+    {
+      "id": "rules.touch-target-min-size",
+      "type": "rule",
+      "name": "Touch targets meet a minimum size",
+      "summary": "Tappable controls should be large enough and spaced enough to hit reliably — a common floor is 24x24 CSS px minimum, with 44x44 preferred for primary touch actions.",
+      "status": "stable",
+      "tags": [
+        "accessibility",
+        "mobile",
+        "touch"
+      ],
+      "path": "knowledge/rules/touch-target-min-size.md"
+    }
+  ]
+}

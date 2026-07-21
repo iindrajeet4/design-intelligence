@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/iindrajeet4/design-intelligence/schemas/project-context.schema.json",
+  "title": "Design Intelligence — Project Context",
+  "description": "The standard file a coding agent reads to select relevant design intelligence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["product_type"],
+  "properties": {
+    "project_name": { "type": "string" },
+    "product_type": { "type": "string" },
+    "target_users": { "type": "array", "items": { "type": "string" } },
+    "primary_goals": { "type": "array", "items": { "type": "string" } },
+    "business_goals": { "type": "array", "items": { "type": "string" } },
+    "platform": { "type": "array", "items": { "enum": ["web", "mobile", "desktop"] } },
+    "devices": { "type": "array", "items": { "type": "string" } },
+    "brand_personality": { "type": "array", "items": { "type": "string" } },
+    "accessibility_target": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": { "wcag": { "enum": ["A", "AA", "AAA"] } }
+    },
+    "density": { "enum": ["low", "medium", "high"] },
+    "interaction_frequency": { "enum": ["low", "medium", "high"] },
+    "conversion_priority": { "enum": ["low", "medium", "high"] }
+  }
+}

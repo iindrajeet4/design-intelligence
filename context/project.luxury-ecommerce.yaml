@@ -1,0 +1,13 @@
+# Example project context — luxury jewelry e-commerce.
+project_name: Atelier Rings
+product_type: ecommerce
+target_users: [engagement_ring_shoppers]
+primary_goals: [explore_collection, build_trust, purchase]
+business_goals: [increase_conversion, brand_prestige]
+platform: [web]
+devices: [mobile, desktop]
+brand_personality: [luxury, elegant, trustworthy]
+accessibility_target: { wcag: AA }
+density: low
+interaction_frequency: low
+conversion_priority: high

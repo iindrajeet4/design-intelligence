@@ -1,0 +1,14 @@
+# Example project context — enterprise SaaS analytics.
+# Validate against schemas/project-context.schema.json.
+project_name: Example Analytics
+product_type: saas
+target_users: [marketing_managers, analysts]
+primary_goals: [analyze_campaign_performance]
+business_goals: [increase_retention]
+platform: [web]
+devices: [desktop, tablet, mobile]
+brand_personality: [professional, trustworthy]
+accessibility_target: { wcag: AA }
+density: high
+interaction_frequency: high
+conversion_priority: medium

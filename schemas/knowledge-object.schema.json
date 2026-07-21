@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/iindrajeet4/design-intelligence/schemas/knowledge-object.schema.json",
+  "title": "Design Intelligence — Knowledge Object",
+  "description": "Contract for the YAML frontmatter of an atomic knowledge object.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "type", "name", "summary", "status"],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+\\.[a-z0-9-]+$"
+    },
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "target"],
+      "properties": {
+        "kind": {
+          "enum": ["refines", "implements", "composes", "requires", "conflicts_with", "resolved_by", "evidenced_by", "reviewed_by", "related_to"]
+        },
+        "target": { "$ref": "#/$defs/id" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["class", "title"],
+      "properties": {
+        "class": {
+          "enum": ["official_standard", "official_design_system", "research", "industry_practice", "community_reference"]
+        },
+        "title": { "type": "string" },
+        "url": { "type": "string" }
+      }
+    }
+  },
+  "properties": {
+    "id": { "$ref": "#/$defs/id" },
+    "type": { "enum": ["principle", "pattern", "component", "interaction", "rule", "anti-pattern", "heuristic", "decision", "token"] },
+    "name": { "type": "string", "maxLength": 80 },
+    "summary": { "type": "string", "maxLength": 280 },
+    "status": { "enum": ["draft", "stable", "deprecated"] },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "applies_to": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "platforms": { "type": "array", "items": { "enum": ["web", "mobile", "desktop"] } },
+        "product_types": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "relations": { "type": "array", "items": { "$ref": "#/$defs/relation" } },
+    "sources": { "type": "array", "items": { "$ref": "#/$defs/source" } },
+    "supersedes": { "$ref": "#/$defs/id" }
+  }
+}

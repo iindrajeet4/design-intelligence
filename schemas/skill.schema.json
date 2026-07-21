@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/iindrajeet4/design-intelligence/schemas/skill.schema.json",
+  "title": "Design Intelligence — Skill",
+  "description": "Contract for the YAML frontmatter of a SKILL.md file.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "description", "version", "type", "category", "status"],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+\\.[a-z0-9-]+$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["class", "title"],
+      "properties": {
+        "class": {
+          "enum": ["official_standard", "official_design_system", "research", "industry_practice", "community_reference"]
+        },
+        "title": { "type": "string" },
+        "url": { "type": "string" }
+      }
+    },
+    "score": { "type": "integer", "minimum": 1, "maximum": 5 }
+  },
+  "properties": {
+    "id": { "$ref": "#/$defs/id" },
+    "name": { "type": "string", "pattern": "^[a-z0-9-]{1,64}$" },
+    "description": { "type": "string", "minLength": 1, "maxLength": 1024 },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "type": { "enum": ["skill"] },
+    "category": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "priority": { "enum": ["low", "medium", "high"] },
+    "complexity": { "enum": ["basic", "intermediate", "advanced"] },
+    "applies_to": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "platforms": { "type": "array", "items": { "enum": ["web", "mobile", "desktop"] } },
+        "product_types": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "knowledge": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+    "dependencies": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+    "related_skills": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+    "validation_rules": { "type": "array", "items": { "type": "string" } },
+    "sources": { "type": "array", "items": { "$ref": "#/$defs/source" } },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence": { "$ref": "#/$defs/score" },
+        "clarity": { "$ref": "#/$defs/score" },
+        "implementation": { "$ref": "#/$defs/score" },
+        "accessibility": { "$ref": "#/$defs/score" },
+        "reusability": { "$ref": "#/$defs/score" },
+        "maintainability": { "$ref": "#/$defs/score" }
+      }
+    },
+    "status": { "enum": ["draft", "stable", "deprecated"] },
+    "supersedes": { "$ref": "#/$defs/id" }
+  }
+}
