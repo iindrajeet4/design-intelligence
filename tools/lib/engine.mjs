@@ -140,13 +140,17 @@ export function recommend(context) {
   const pt = (context.product_type || "").toLowerCase();
   const density = context.density || "medium";
   const platforms = context.platform || [];
+  const devices = context.devices || [];
   const brand = (context.brand_personality || []).map((b) => b.toLowerCase());
   const wcag = context.accessibility_target?.wcag || "AA";
+  const conv = context.conversion_priority || "medium";
+
+  const emotional = brand.some((b) => ["luxury", "premium", "elegant", "editorial", "playful", "bold", "warm"].includes(b));
+  const dataHeavy = ["saas", "enterprise", "dashboard", "analytics", "admin", "b2b"].some((k) => pt.includes(k)) || density === "high";
+  const isMobile = platforms.includes("mobile") || devices.includes("mobile");
+  const commerce = ["ecommerce", "commerce", "shop", "store", "retail", "marketing"].some((k) => pt.includes(k));
 
   const recs = [];
-  const emotional = brand.some((b) => ["luxury", "premium", "elegant", "editorial", "playful", "bold"].includes(b));
-  const dataHeavy = ["saas", "enterprise", "dashboard", "analytics", "admin", "b2b"].some((k) => pt.includes(k)) || density === "high";
-
   recs.push(dataHeavy
     ? { area: "navigation", recommendation: "persistent sidebar", confidence: "high", reasoning: "frequent switching across many sections", tradeoffs: "consumes horizontal space", alternatives: ["top-nav", "command-palette"], evidence: "decisions.sidebar-when-frequent-switching" }
     : { area: "navigation", recommendation: "top navigation", confidence: "medium", reasoning: "few top-level destinations", tradeoffs: "limited room for many items", alternatives: ["sidebar"], evidence: "decisions.sidebar-when-frequent-switching" });
@@ -155,13 +159,25 @@ export function recommend(context) {
     ? { area: "visual-language", recommendation: "editorial hierarchy — large imagery, generous whitespace, restrained palette", confidence: "high", reasoning: "emotional/visual brand priority", tradeoffs: "lower information density", alternatives: ["utilitarian dense layout"], evidence: "decisions.editorial-when-emotional" }
     : { area: "visual-language", recommendation: "structured, high-legibility system with clear hierarchy", confidence: "medium", reasoning: "functional priority over emotional impact", tradeoffs: "less distinctive", alternatives: ["editorial"], evidence: "principles.hierarchy-reflects-priority" });
 
-  recs.push({ area: "accessibility", recommendation: `target WCAG ${wcag} — visible focus, labels, contrast, keyboard paths`, confidence: "high", reasoning: "accessibility is a hard constraint, never optional", tradeoffs: "none worth trading", alternatives: [], evidence: "rules.contrast-meets-wcag-aa" });
+  recs.push(dataHeavy
+    ? { area: "typography", recommendation: "compact, highly legible type scale; tabular numerals for data", confidence: "high", reasoning: "dense data must stay scannable", tradeoffs: "less expressive", alternatives: ["larger editorial scale"], evidence: "typography.typography-system" }
+    : { area: "typography", recommendation: "expressive display paired with a readable body on a clear scale", confidence: "medium", reasoning: "type carries brand character here", tradeoffs: "needs careful pairing", alternatives: ["single neutral family"], evidence: "typography.typography-system" });
+
+  recs.push({ area: "spacing-and-density", recommendation: density === "high" ? "compact density with a comfortable-mode toggle" : "generous spacing on a consistent scale", confidence: "medium", reasoning: `density target is ${density}`, tradeoffs: density === "high" ? "risk of crowding — protect touch targets" : "more scrolling", alternatives: ["the other density"], evidence: "spacing.spacing-system" });
+
+  recs.push({ area: "feedback-and-states", recommendation: "design loading (skeletons), empty, and error states for every async view; give visible feedback to every action", confidence: "high", reasoning: "generated UIs routinely omit these states", tradeoffs: "more states to build", alternatives: [], evidence: "principles.feedback-for-every-action" });
+
+  recs.push({ area: "accessibility", recommendation: `target WCAG ${wcag} — semantic HTML, visible focus, labels, contrast, keyboard paths, reduced-motion`, confidence: "high", reasoning: "accessibility is a hard constraint, never optional", tradeoffs: "none worth trading", alternatives: [], evidence: "accessibility.accessibility-foundations" });
+
+  if (commerce || conv === "high") {
+    recs.push({ area: "conversion", recommendation: "one clear primary path per step; visible trust signals; no dark patterns", confidence: "high", reasoning: commerce ? "commerce context" : "high conversion priority", tradeoffs: "fewer competing calls-to-action", alternatives: [], evidence: "conversion.trust-and-conversion" });
+  }
 
   // conflict detection
   const conflicts = [];
-  if (density === "high" && platforms.includes("mobile")) {
-    conflicts.push({ between: ["information density (high)", "mobile simplicity"], severity: "high", resolution: "progressive disclosure on mobile — prioritise, collapse, and defer secondary content", evidence: "patterns.progressive-disclosure" });
-  }
+  if (density === "high" && isMobile) conflicts.push({ between: ["information density (high)", "mobile simplicity"], severity: "high", resolution: "progressive disclosure on mobile — prioritise, collapse, and defer secondary content", evidence: "patterns.progressive-disclosure" });
+  if (emotional && (wcag === "AA" || wcag === "AAA")) conflicts.push({ between: ["restrained/luxury palette", `WCAG ${wcag} contrast`], severity: "medium", resolution: "keep the premium palette but darken ink / lighten ground until text meets contrast; never grey-on-grey", evidence: "rules.contrast-meets-wcag-aa" });
+  if (emotional && commerce) conflicts.push({ between: ["editorial storytelling", "transactional clarity"], severity: "medium", resolution: "lead with an editorial hero, then a clear structured path to action; avoid carousels for key content", evidence: "anti-patterns.carousel-for-key-content" });
 
   // relevant skills by applicability score
   const relevant = idx.skills.map((s) => {
@@ -170,10 +186,13 @@ export function recommend(context) {
     if (platforms.some((p) => s.platforms.includes(p))) score += 2;
     if (s.priority === "high") score += 1;
     if (s.category === "accessibility") score += 1;
+    if (isMobile && (s.category === "mobile" || s.category === "responsive")) score += 2;
+    if (commerce && (s.category === "conversion" || s.category === "media")) score += 1;
+    if (dataHeavy && (s.category === "data-tables" || s.category === "dashboard" || s.category === "charts")) score += 1;
     return { id: s.id, category: s.category, score };
-  }).filter((x) => x.score > 0).sort((a, b) => b.score - a.score).slice(0, 8);
+  }).filter((x) => x.score > 0).sort((a, b) => b.score - a.score).slice(0, 10);
 
-  return { context: { product_type: context.product_type, density, platforms, wcag }, recommendations: recs, conflicts, relevant_skills: relevant };
+  return { context: { product_type: context.product_type, density, platforms, wcag, conversion_priority: conv }, recommendations: recs, conflicts, relevant_skills: relevant };
 }
 
 // ---------- review (static heuristic baseline) ----------
@@ -184,26 +203,47 @@ export function reviewHtml(html) {
 
   const imgs = html.match(/<img\b[^>]*>/gi) || [];
   const imgsNoAlt = imgs.filter((t) => !/\balt\s*=/.test(t));
-  if (imgsNoAlt.length) add("critical", "accessibility", `${imgsNoAlt.length} image(s) missing alt text`, "add descriptive alt (or alt=\"\" if decorative)", "rules.contrast-meets-wcag-aa");
+  if (imgsNoAlt.length) add("critical", "accessibility", `${imgsNoAlt.length} image(s) missing alt text`, "add descriptive alt (or alt=\"\" if decorative)", "media.responsive-images");
 
   const inputs = html.match(/<input\b[^>]*>/gi) || [];
   const inputsNoLabel = inputs.filter((t) => !/aria-label|aria-labelledby|\btype\s*=\s*["']?(hidden|submit|button)/i.test(t) && !/\bid\s*=/.test(t));
   if (inputsNoLabel.length) add("critical", "accessibility", `${inputsNoLabel.length} input(s) with no associable label`, "add a <label for> or aria-label", "rules.form-controls-have-labels");
 
-  if (!/<html[^>]*\blang\s*=/i.test(html)) add("high", "accessibility", "html element has no lang attribute", "add lang=\"en\" (or the correct language)", "rules.contrast-meets-wcag-aa");
-  if (!/<meta[^>]*name\s*=\s*["']?viewport/i.test(html)) add("high", "responsive", "no viewport meta tag", "add <meta name=viewport content=\"width=device-width, initial-scale=1\">", "principles.hierarchy-reflects-priority");
+  if (!/<html[^>]*\blang\s*=/i.test(html)) add("high", "accessibility", "html element has no lang attribute", "add lang=\"en\" (or the correct language)", "accessibility.accessibility-foundations");
+  if (!/<meta[^>]*name\s*=\s*["']?viewport/i.test(html)) add("high", "responsive", "no viewport meta tag", "add <meta name=viewport content=\"width=device-width, initial-scale=1\">", "responsive.responsive-design");
 
   const emptyButtons = (html.match(/<button\b[^>]*>\s*<\/button>/gi) || []).length;
-  if (emptyButtons) add("high", "accessibility", `${emptyButtons} button(s) with no accessible text`, "provide button text or aria-label", "heuristics.primary-action-distinct");
+  if (emptyButtons) add("high", "accessibility", `${emptyButtons} button(s) with no accessible text`, "provide button text or aria-label", "buttons.button-design");
+
+  const emptyLinks = (html.match(/<a\b[^>]*>\s*<\/a>/gi) || []).length;
+  if (emptyLinks) add("high", "accessibility", `${emptyLinks} link(s) with no text`, "give the link visible text or an aria-label", "accessibility.accessibility-foundations");
+
+  // heading outline
+  const levels = [...html.matchAll(/<h([1-6])\b/gi)].map((m) => Number(m[1]));
+  if (levels.length) {
+    const h1c = levels.filter((l) => l === 1).length;
+    if (h1c === 0) add("medium", "accessibility", "no h1 heading", "add a single h1 describing the page", "rules.logical-heading-order");
+    else if (h1c > 1) add("medium", "accessibility", `${h1c} h1 headings (should be exactly one)`, "use one h1; nest sections with h2+", "rules.logical-heading-order");
+    let skipped = false;
+    for (let i = 1; i < levels.length; i++) if (levels[i] - levels[i - 1] > 1) { skipped = true; break; }
+    if (skipped) add("medium", "accessibility", "heading levels skip (e.g. h2 to h4)", "do not skip heading levels", "rules.logical-heading-order");
+  }
+
+  if (/<table\b/i.test(html) && !/<th\b/i.test(html)) add("medium", "accessibility", "table has no header cells (th)", "use th with scope for column/row headers", "data-tables.accessible-data-tables");
+  if (/<(video|audio)\b[^>]*\bautoplay/i.test(html)) add("medium", "accessibility", "autoplaying media", "avoid autoplay; provide controls and respect reduced-motion", "rules.respect-reduced-motion");
 
   if (!/:focus|focus-visible|outline/i.test(html)) add("medium", "accessibility", "no visible focus styling detected", "ensure interactive elements have a visible focus state", "rules.interactive-has-focus-state");
+  if (/<head\b/i.test(html) && !/<meta[^>]*charset/i.test(html)) add("low", "ui", "no meta charset declared", "add <meta charset=\"utf-8\"> as the first head element", "accessibility.accessibility-foundations");
 
   const weights = { critical: 25, high: 10, medium: 5, low: 2 };
   const score = Math.max(0, 100 - issues.reduce((a, i) => a + (weights[i.severity] || 0), 0));
+  const by_dimension = {};
+  for (const i of issues) by_dimension[i.dimension] = (by_dimension[i.dimension] || 0) + 1;
   return {
     score,
     critical_issues: issues.filter((i) => i.severity === "critical").length,
     high_priority: issues.filter((i) => i.severity === "high").length,
+    by_dimension,
     note: "Static heuristic pass only. Semantic UX/UI/product review is performed by an agent via engine/review-engine.",
     issues,
   };
