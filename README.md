@@ -88,3 +88,12 @@ Code: [Apache-2.0](LICENSE) · Knowledge content (`knowledge/`, `skills/`, `engi
 ---
 
 From the maker of **[DubeGames](https://dubegames.indrajeetdubeyy.workers.dev/)**.
+
+---
+
+## 💼 Services & custom work
+
+I take on freelance and contract work around this project — custom implementation,
+new features, and integration with your stack.
+
+**Contact:** [GitHub @iindrajeet4](https://github.com/iindrajeet4) (opening an issue on this repo works too) · [DubeGames](https://dubegames.indrajeetdubeyy.workers.dev/)
