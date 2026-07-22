@@ -255,3 +255,67 @@ export function loadContext(file) {
   const errors = validate(data, loadSchemas().context);
   return { data, errors };
 }
+
+// ---------- introspection ----------
+
+function allDocs() {
+  return [
+    ...skillFiles().map((f) => ({ f, kind: "skill" })),
+    ...knowledgeFiles().map((f) => ({ f, kind: "knowledge" })),
+  ].map(({ f, kind }) => {
+    const { data, body } = parseFrontmatter(fs.readFileSync(f, "utf8"));
+    return { kind, data, body, path: rel(f) };
+  });
+}
+
+export function findById(id) {
+  return allDocs().find((d) => d.data.id === id) || null;
+}
+
+export function relations(id) {
+  const nodes = knowledgeFiles().map((f) => parseFrontmatter(fs.readFileSync(f, "utf8")).data).filter((d) => d.id);
+  const edges = [];
+  for (const n of nodes)
+    for (const r of (Array.isArray(n.relations) ? n.relations : []))
+      if (r && r.kind && r.target) edges.push({ from: n.id, kind: r.kind, to: r.target });
+  if (!id) return { nodes: nodes.length, edges: edges.length, graph: edges };
+  return {
+    id,
+    outgoing: edges.filter((e) => e.from === id),
+    incoming: edges.filter((e) => e.to === id),
+  };
+}
+
+export function stats() {
+  const idx = buildIndex();
+  const tally = (arr, key) => arr.reduce((m, x) => { const k = x[key] || "unknown"; m[k] = (m[k] || 0) + 1; return m; }, {});
+  const kdocs = knowledgeFiles().map((f) => parseFrontmatter(fs.readFileSync(f, "utf8")).data);
+  const sources = {};
+  for (const f of [...skillFiles(), ...knowledgeFiles()]) {
+    const d = parseFrontmatter(fs.readFileSync(f, "utf8")).data;
+    for (const s of (Array.isArray(d.sources) ? d.sources : [])) if (s && s.class) sources[s.class] = (sources[s.class] || 0) + 1;
+  }
+  return {
+    skills: idx.stats.skills,
+    knowledge: idx.stats.knowledge,
+    knowledge_by_type: tally(kdocs, "type"),
+    skills_by_category: tally(idx.skills, "category"),
+    skills_by_status: tally(idx.skills, "status"),
+    source_classes: sources,
+  };
+}
+
+export function qualityReport() {
+  const criteria = ["evidence", "clarity", "implementation", "accessibility", "reusability", "maintainability"];
+  const skills = skillFiles().map((f) => parseFrontmatter(fs.readFileSync(f, "utf8")).data).filter((d) => d.id);
+  const withQ = skills.filter((s) => s.quality);
+  const missing = skills.filter((s) => !s.quality).map((s) => s.id);
+  const avg = {};
+  for (const c of criteria) {
+    const vals = withQ.map((s) => s.quality[c]).filter((v) => typeof v === "number");
+    avg[c] = vals.length ? Number((vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(2)) : null;
+  }
+  const overall = (s) => { const v = criteria.map((c) => s.quality[c]).filter((n) => typeof n === "number"); return v.length ? v.reduce((a, b) => a + b, 0) / v.length : 0; };
+  const ranked = withQ.map((s) => ({ id: s.id, score: Number(overall(s).toFixed(2)) })).sort((a, b) => a.score - b.score);
+  return { scored: withQ.length, missing_quality: missing, average_by_criterion: avg, lowest: ranked.slice(0, 5), highest: ranked.slice(-5).reverse() };
+}

@@ -9,9 +9,10 @@
   "bin": { "di": "tools/di.mjs", "di-mcp": "tools/di-mcp.mjs" },
   "engines": { "node": ">=18" },
   "scripts": {
+    "test": "node tools/test.mjs",
     "validate": "node tools/di.mjs validate",
     "build-index": "node tools/di.mjs build-index",
-    "check": "node tools/di.mjs validate && node tools/di.mjs build-index --check",
+    "check": "node tools/test.mjs && node tools/di.mjs validate && node tools/di.mjs build-index --check",
     "mcp": "node tools/di-mcp.mjs"
   },
   "keywords": ["design-system", "ai-agents", "claude-code", "agent-skills", "design-tokens", "accessibility", "ux"],

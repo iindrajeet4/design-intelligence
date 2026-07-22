@@ -14,6 +14,8 @@ jobs:
         with:
           node-version: "20"
       # Zero runtime dependencies — nothing to install.
+      - name: Unit tests (parser, validator, engine)
+        run: node tools/test.mjs
       - name: Validate all skills and knowledge objects
         run: node tools/di.mjs validate
       - name: Ensure the retrieval index is up to date
