@@ -9,7 +9,7 @@ import path from "node:path";
 import {
   validateAll, buildIndex, serializeIndex, indexPath,
   search, recommend, reviewHtml, loadContext,
-  findById, relations, stats, qualityReport, ROOT,
+  findById, relations, stats, qualityReport, generateTokens, ROOT,
 } from "./lib/engine.mjs";
 
 const [cmd, ...rest] = process.argv.slice(2);
@@ -108,6 +108,26 @@ switch (cmd) {
     break;
   }
 
+  case "tokens": {
+    const file = arg("--project") || positional[0];
+    if (!file) { console.error("usage: di tokens <project.yaml> [--css] [--out <dir>]"); process.exit(1); }
+    const { data, errors } = loadContext(file);
+    if (errors.length) { console.error("✗ invalid project context:\n" + errors.map((e) => "  - " + e).join("\n")); process.exit(1); }
+    const gen = generateTokens(data);
+    const outDir = arg("--out");
+    if (outDir) {
+      fs.mkdirSync(outDir, { recursive: true });
+      fs.writeFileSync(path.join(outDir, "tokens.json"), JSON.stringify(gen.dtcg, null, 2) + "\n");
+      fs.writeFileSync(path.join(outDir, "tokens.css"), gen.css);
+      console.log(`✓ wrote ${outDir}/tokens.json and ${outDir}/tokens.css (brand=${gen.brand}, density=${gen.density}) — verify WCAG AA before shipping`);
+    } else if (flag("--css")) {
+      console.log(gen.css);
+    } else {
+      out(gen.dtcg);
+    }
+    break;
+  }
+
   case "new-skill": {
     const category = positional[0];
     const name = positional[1];
@@ -173,6 +193,7 @@ TODO related skill ids.
       "  di search <terms...>            find skills by keyword",
       "  di recommend <project.yaml>     contextual recommendations for a project",
       "  di review [page.html]           static design/accessibility heuristic pass",
+      "  di tokens <project.yaml>        generate DTCG tokens + CSS (--css, --out <dir>)",
       "  di explain <id> [--json]        print a skill or knowledge object",
       "  di graph [id]                   show the knowledge relation graph (or one node)",
       "  di stats                        counts by type, category, status, source class",

@@ -319,3 +319,90 @@ export function qualityReport() {
   const ranked = withQ.map((s) => ({ id: s.id, score: Number(overall(s).toFixed(2)) })).sort((a, b) => a.score - b.score);
   return { scored: withQ.length, missing_quality: missing, average_by_criterion: avg, lowest: ranked.slice(0, 5), highest: ranked.slice(-5).reverse() };
 }
+
+// ---------- token generator ----------
+// Produces a coherent STARTER design-token set from a project context, in the W3C
+// Design Tokens (DTCG) JSON shape plus CSS custom properties (light + dark). Every
+// token carries a rationale ($description). Contrast must be verified before shipping.
+
+export function generateTokens(context = {}) {
+  const brand = (context.brand_personality || []).map((b) => String(b).toLowerCase());
+  const density = context.density || "medium";
+  const has = (...xs) => brand.some((b) => xs.includes(b));
+
+  const accent = has("luxury", "premium", "elegant", "editorial")
+    ? { name: "amber", 500: "#C98A3C", 600: "#A66A22", 700: "#824F14" }
+    : has("playful", "bold", "vibrant", "energetic", "fun")
+    ? { name: "violet", 500: "#7C5CFC", 600: "#6845E0", 700: "#5433BE" }
+    : has("trustworthy", "professional", "calm", "corporate", "secure")
+    ? { name: "blue", 500: "#2F6FED", 600: "#1F57C8", 700: "#17429B" }
+    : { name: "indigo", 500: "#4F46E5", 600: "#4338CA", 700: "#3730A3" };
+
+  const neutral = { 0: "#FFFFFF", 50: "#F7F8FA", 100: "#EDEFF3", 200: "#DCE0E8", 300: "#C2C8D4", 400: "#98A1B2", 500: "#6B7280", 600: "#4B5563", 700: "#374151", 800: "#1F2633", 900: "#11151C" };
+  const status = { success: "#2C7A69", warning: "#B26B00", danger: "#C0392B" };
+
+  const radius = has("luxury", "premium", "elegant", "editorial", "serious")
+    ? { sm: "2px", md: "4px", lg: "8px" }
+    : has("playful", "bold", "fun", "friendly")
+    ? { sm: "8px", md: "14px", lg: "24px" }
+    : { sm: "4px", md: "8px", lg: "12px" };
+
+  const baseFont = density === "high" ? 14 : 16;
+  const c = (v, d) => ({ $type: "color", $value: v, $description: d });
+  const dim = (v, d) => ({ $type: "dimension", $value: v, $description: d });
+  const dur = (v, d) => ({ $type: "duration", $value: v, $description: d });
+
+  const dtcg = {
+    color: {
+      neutral: Object.fromEntries(Object.entries(neutral).map(([k, v]) => [k, c(v, `neutral ${k} — chosen cool-grey ramp`)])),
+      accent: { 500: c(accent[500], `${accent.name} accent, base`), 600: c(accent[600], `${accent.name} accent, action`), 700: c(accent[700], `${accent.name} accent, hover/active`) },
+      status: { success: c(status.success, "success"), warning: c(status.warning, "warning"), danger: c(status.danger, "danger/critical") },
+      text: { primary: c("{color.neutral.900}", "primary text on default surface"), muted: c("{color.neutral.600}", "secondary text — verify >= 4.5:1"), inverse: c("{color.neutral.0}", "text on dark/accent surfaces") },
+      surface: { default: c("{color.neutral.0}", "page/base surface"), raised: c("{color.neutral.50}", "cards, raised surfaces"), sunken: c("{color.neutral.100}", "wells, insets") },
+      border: { subtle: c("{color.neutral.200}", "hairline separators"), strong: c("{color.neutral.300}", "emphasis borders") },
+      action: { primary: c("{color.accent.600}", "primary action background"), "primary-hover": c("{color.accent.700}", "primary action hover"), "focus-ring": c("{color.accent.500}", "keyboard focus indicator") },
+    },
+    space: Object.fromEntries([["1", "4px"], ["2", "8px"], ["3", "12px"], ["4", "16px"], ["5", "24px"], ["6", "32px"], ["8", "48px"], ["10", "64px"]].map(([k, v]) => [k, dim(v, `spacing step ${k}`)])),
+    radius: { sm: dim(radius.sm, "small radius"), md: dim(radius.md, "default radius"), lg: dim(radius.lg, "large radius") },
+    "font-size": Object.fromEntries([["xs", baseFont - 3], ["sm", baseFont - 1], ["base", baseFont], ["lg", Math.round(baseFont * 1.25)], ["xl", Math.round(baseFont * 1.6)], ["2xl", Math.round(baseFont * 2.1)], ["3xl", Math.round(baseFont * 2.7)]].map(([k, v]) => [k, dim(`${v}px`, `type scale ${k} (base ${baseFont}px, density=${density})`)])),
+    "motion-duration": { instant: dur("75ms", "micro-feedback"), fast: dur("150ms", "small transitions"), base: dur("250ms", "standard transitions"), slow: dur("400ms", "large transitions") },
+    component: {
+      "button-primary-background": c("{color.action.primary}", "primary button background"),
+      "button-primary-foreground": c("{color.text.inverse}", "primary button text"),
+      "input-border": c("{color.border.strong}", "form control border"),
+      "focus-ring": c("{color.action.focus-ring}", "focus ring across components"),
+    },
+  };
+
+  const light = {
+    "color-text-primary": neutral[900], "color-text-muted": neutral[600], "color-text-inverse": neutral[0],
+    "color-surface-default": neutral[0], "color-surface-raised": neutral[50], "color-surface-sunken": neutral[100],
+    "color-border-subtle": neutral[200], "color-border-strong": neutral[300],
+    "color-action-primary": accent[600], "color-action-primary-hover": accent[700], "color-focus-ring": accent[500],
+    "color-success": status.success, "color-warning": status.warning, "color-danger": status.danger,
+  };
+  const dark = {
+    "color-text-primary": neutral[50], "color-text-muted": neutral[400], "color-text-inverse": neutral[900],
+    "color-surface-default": neutral[900], "color-surface-raised": neutral[800], "color-surface-sunken": "#0B0E13",
+    "color-border-subtle": neutral[700], "color-border-strong": neutral[600],
+    "color-action-primary": accent[500], "color-action-primary-hover": accent[600], "color-focus-ring": accent[500],
+    "color-success": "#3FA894", "color-warning": "#D79A2B", "color-danger": "#E06B5E",
+  };
+  const scale = { "space-1": "4px", "space-2": "8px", "space-3": "12px", "space-4": "16px", "space-5": "24px", "space-6": "32px", "space-8": "48px", "space-10": "64px", "radius-sm": radius.sm, "radius-md": radius.md, "radius-lg": radius.lg, "font-size-base": `${baseFont}px`, "motion-fast": "150ms", "motion-base": "250ms" };
+  const block = (obj) => Object.entries(obj).map(([k, v]) => `  --${k}: ${v};`).join("\n");
+  const css = `/* Generated starter tokens — brand=${accent.name}, density=${density}. Verify WCAG AA before shipping. */
+:root {
+${block({ ...light, ...scale })}
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+${block(dark)}
+  }
+}
+:root[data-theme="dark"] {
+${block(dark)}
+}
+`;
+
+  return { brand: accent.name, density, dtcg, css };
+}

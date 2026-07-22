@@ -171,9 +171,9 @@ Emergent's standard build agents have **no persistent per-project instruction st
 1. **MCP (recommended)** — on the project setup screen: **Advanced Controls → Select MCP Tools →
    Configure New MCP**, paste a stdio config, **Verify and Save**:
    ```json
-   { "mcpServers": { "design-intelligence": { "command": "npx", "args": ["-y", "design-intelligence-mcp"] } } }
+   { "mcpServers": { "design-intelligence": { "command": "npx", "args": ["-y", "-p", "design-intelligence", "di-mcp"] } } }
    ```
-   (Until an npm package is published, run the local server or use a fetch-capable MCP.)
+   (This works once the package is published to npm — see [PUBLISHING.md](../PUBLISHING.md). Before that, point `command`/`args` at the local `node /abs/path/tools/di-mcp.mjs`, or use a fetch-capable MCP.)
 2. **Vendor + bootstrap prompt** — copy a `.design-intelligence/` folder (CLAUDE.md + skills + index)
    into your app repo, **Pull from GitHub**, and make the first prompt:
    *"This repo has a design knowledge system in `.design-intelligence/`. Before any UI work, read
