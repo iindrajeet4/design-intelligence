@@ -1,0 +1,29 @@
+# Demo project context — an enterprise SaaS analytics dashboard.
+project_name: Northwind Analytics
+product_type: enterprise_saas
+target_users:
+  - marketing_managers
+  - data_analysts
+  - operations
+primary_goals:
+  - monitor_campaign_performance
+  - spot_anomalies_fast
+  - export_reports
+business_goals:
+  - increase_retention
+  - reduce_time_to_insight
+platform:
+  - web
+  - desktop
+devices:
+  - desktop
+  - tablet
+brand_personality:
+  - professional
+  - trustworthy
+  - calm
+accessibility_target:
+  wcag: AA
+density: high
+interaction_frequency: high
+conversion_priority: low

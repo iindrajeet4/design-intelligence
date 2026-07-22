@@ -47,8 +47,10 @@ node tools/di.mjs review your-page.html
 node tools/di.mjs validate
 ```
 
-**See it end-to-end:** [`examples/luxury-jewelry/`](examples/luxury-jewelry/) — a full run
-from brief → `recommend` → `tokens` → build → `review`, taking a page from **33 → 100**.
+**See it end-to-end — same engine, opposite answers:**
+
+- [`examples/luxury-jewelry/`](examples/luxury-jewelry/) — emotional commerce → editorial, top nav, amber, 16px (review loop **33 → 100**)
+- [`examples/saas-dashboard/`](examples/saas-dashboard/) — enterprise analytics → sidebar, dense, blue, 14px, tabular numerals (**100/100**)
 
 ## Use it in your AI agent
 

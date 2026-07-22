@@ -11,7 +11,7 @@ import {
   search, recommend, reviewHtml, loadContext,
   findById, relations, stats, qualityReport, generateTokens, certify, buildRegistry, ROOT,
 } from "./lib/engine.mjs";
-import { renderSite } from "./lib/site.mjs";
+import { renderSite, renderDemoGallery } from "./lib/site.mjs";
 
 const [cmd, ...rest] = process.argv.slice(2);
 const flag = (name) => rest.includes(name);
@@ -116,13 +116,23 @@ switch (cmd) {
     fs.mkdirSync(abs, { recursive: true });
     fs.writeFileSync(path.join(abs, "registry.json"), JSON.stringify(reg, null, 2) + "\n");
     fs.writeFileSync(path.join(abs, "index.html"), renderSite(reg));
-    // bundle the worked example so it's viewable on the deployed site at /demo/
-    const demoSrc = path.join(ROOT, "examples", "luxury-jewelry", "index.html");
+    // bundle the worked examples so they're viewable on the deployed site at /demo/
+    const DEMOS = [
+      { slug: "jewelry", dir: "luxury-jewelry", name: "Aurelia — luxury jewelry", description: "Emotional, editorial commerce: large imagery, generous whitespace, restrained amber palette, trust signals.", swatch: "linear-gradient(120deg,#F3E3C9,#E4CBA0)", traits: ["editorial", "top nav", "amber", "16px base", "low density"] },
+      { slug: "dashboard", dir: "saas-dashboard", name: "Northwind — enterprise SaaS", description: "Data-dense analytics: persistent sidebar, KPI tiles, accessible tables, tabular numerals, calm blue.", swatch: "linear-gradient(120deg,#2F6FED,#17429B)", traits: ["structured", "sidebar", "blue", "14px base", "high density"] },
+    ];
+    const bundled = [];
+    for (const d of DEMOS) {
+      const src = path.join(ROOT, "examples", d.dir, "index.html");
+      if (!fs.existsSync(src)) continue;
+      fs.mkdirSync(path.join(abs, "demo", d.slug), { recursive: true });
+      fs.copyFileSync(src, path.join(abs, "demo", d.slug, "index.html"));
+      bundled.push(d);
+    }
     let demoNote = "";
-    if (fs.existsSync(demoSrc)) {
-      fs.mkdirSync(path.join(abs, "demo"), { recursive: true });
-      fs.copyFileSync(demoSrc, path.join(abs, "demo", "index.html"));
-      demoNote = " + demo/";
+    if (bundled.length) {
+      fs.writeFileSync(path.join(abs, "demo", "index.html"), renderDemoGallery(bundled));
+      demoNote = ` + demo/ (${bundled.map((d) => d.slug).join(", ")})`;
     }
     console.log(`✓ built catalog into ${outDir}/ — ${reg.counts.skills} skills, ${reg.counts.knowledge} knowledge objects (index.html + registry.json${demoNote})`);
     break;

@@ -1,0 +1,65 @@
+/* Generated starter tokens — brand=blue, density=high. Verify WCAG AA before shipping. */
+:root {
+  --color-text-primary: #11151C;
+  --color-text-muted: #4B5563;
+  --color-text-inverse: #FFFFFF;
+  --color-surface-default: #FFFFFF;
+  --color-surface-raised: #F7F8FA;
+  --color-surface-sunken: #EDEFF3;
+  --color-border-subtle: #DCE0E8;
+  --color-border-strong: #C2C8D4;
+  --color-action-primary: #1F57C8;
+  --color-action-primary-hover: #17429B;
+  --color-focus-ring: #2F6FED;
+  --color-success: #2C7A69;
+  --color-warning: #B26B00;
+  --color-danger: #C0392B;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-8: 48px;
+  --space-10: 64px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --font-size-base: 14px;
+  --motion-fast: 150ms;
+  --motion-base: 250ms;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+  --color-text-primary: #F7F8FA;
+  --color-text-muted: #98A1B2;
+  --color-text-inverse: #11151C;
+  --color-surface-default: #11151C;
+  --color-surface-raised: #1F2633;
+  --color-surface-sunken: #0B0E13;
+  --color-border-subtle: #374151;
+  --color-border-strong: #4B5563;
+  --color-action-primary: #2F6FED;
+  --color-action-primary-hover: #1F57C8;
+  --color-focus-ring: #2F6FED;
+  --color-success: #3FA894;
+  --color-warning: #D79A2B;
+  --color-danger: #E06B5E;
+  }
+}
+:root[data-theme="dark"] {
+  --color-text-primary: #F7F8FA;
+  --color-text-muted: #98A1B2;
+  --color-text-inverse: #11151C;
+  --color-surface-default: #11151C;
+  --color-surface-raised: #1F2633;
+  --color-surface-sunken: #0B0E13;
+  --color-border-subtle: #374151;
+  --color-border-strong: #4B5563;
+  --color-action-primary: #2F6FED;
+  --color-action-primary-hover: #1F57C8;
+  --color-focus-ring: #2F6FED;
+  --color-success: #3FA894;
+  --color-warning: #D79A2B;
+  --color-danger: #E06B5E;
+}
