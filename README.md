@@ -46,6 +46,22 @@ node tools/di.mjs review your-page.html
 node tools/di.mjs validate
 ```
 
+## Use it in your AI agent
+
+The knowledge is consumed three ways — **Agent Skills** (`SKILL.md`), an **instruction file**
+(`AGENTS.md` / `CLAUDE.md`), or the **MCP server** (`tools/di-mcp.mjs`). One `AGENTS.md` plus the
+skills already make it usable in **Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI,
+and Windsurf**; the MCP server is the cleanest universal path and also covers **Emergent** and other
+MCP-enabled tools. Web chat agents (ChatGPT, Claude.ai, Lovable, v0, Bolt) use a bootstrap prompt.
+
+Per-agent, copy-paste setup: **[docs/INTEGRATION.md](docs/INTEGRATION.md)**.
+
+```bash
+# Universal MCP registration (example: Claude Code / Codex)
+claude mcp add design-intelligence -- node /abs/path/design-intelligence/tools/di-mcp.mjs
+codex  mcp add design-intelligence -- node /abs/path/design-intelligence/tools/di-mcp.mjs
+```
+
 ## Design principles of the project itself
 
 - **Contextual** — a luxury storefront and an enterprise dashboard get different answers.

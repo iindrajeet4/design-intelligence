@@ -1,0 +1,24 @@
+{
+  "name": "design-intelligence",
+  "version": "0.1.0",
+  "description": "Design knowledge system for AI coding agents: 15 core skills + 3 reasoning engines (decision, generation, review). Query it before designing any UI.",
+  "author": { "name": "iindrajeet4" },
+  "homepage": "https://github.com/iindrajeet4/design-intelligence",
+  "license": "Apache-2.0",
+  "skills": [
+    "./skills/core/principles",
+    "./skills/core/hierarchy",
+    "./skills/core/layout",
+    "./skills/core/typography",
+    "./skills/core/color",
+    "./skills/core/spacing",
+    "./skills/core/responsive",
+    "./skills/core/accessibility",
+    "./skills/core/navigation",
+    "./skills/core/forms",
+    "./skills/core/states",
+    "./skills/core/data-tables",
+    "./skills/core/dashboard",
+    "./engine"
+  ]
+}

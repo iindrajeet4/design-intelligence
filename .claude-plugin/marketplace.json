@@ -1,0 +1,11 @@
+{
+  "name": "design-intelligence",
+  "owner": { "name": "iindrajeet4" },
+  "plugins": [
+    {
+      "name": "design-intelligence",
+      "source": "./",
+      "description": "Design knowledge system: 15 core skills + 3 reasoning engines for AI coding agents."
+    }
+  ]
+}
