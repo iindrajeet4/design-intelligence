@@ -1,5 +1,9 @@
 node_modules/
 *.log
+
+# generated catalog site (built + deployed by CI; run `node tools/di.mjs build-site` locally)
+/site/
+/_site/
 .DS_Store
 Thumbs.db
 .claude/settings.local.json

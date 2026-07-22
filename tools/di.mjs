@@ -9,8 +9,9 @@ import path from "node:path";
 import {
   validateAll, buildIndex, serializeIndex, indexPath,
   search, recommend, reviewHtml, loadContext,
-  findById, relations, stats, qualityReport, generateTokens, certify, ROOT,
+  findById, relations, stats, qualityReport, generateTokens, certify, buildRegistry, ROOT,
 } from "./lib/engine.mjs";
+import { renderSite } from "./lib/site.mjs";
 
 const [cmd, ...rest] = process.argv.slice(2);
 const flag = (name) => rest.includes(name);
@@ -105,6 +106,22 @@ switch (cmd) {
 
   case "quality": {
     out(qualityReport());
+    break;
+  }
+
+  case "build-site": {
+    const outDir = arg("--out") || "site";
+    const reg = buildRegistry();
+    const abs = path.isAbsolute(outDir) ? outDir : path.join(ROOT, outDir);
+    fs.mkdirSync(abs, { recursive: true });
+    fs.writeFileSync(path.join(abs, "registry.json"), JSON.stringify(reg, null, 2) + "\n");
+    fs.writeFileSync(path.join(abs, "index.html"), renderSite(reg));
+    console.log(`✓ built catalog into ${outDir}/ — ${reg.counts.skills} skills, ${reg.counts.knowledge} knowledge objects (index.html + registry.json)`);
+    break;
+  }
+
+  case "registry": {
+    out(buildRegistry());
     break;
   }
 
@@ -209,6 +226,8 @@ TODO related skill ids.
       "  di stats                        counts by type, category, status, source class",
       "  di quality                      quality-score report across skills",
       "  di certify <id>                 run the automated certification gate on one item",
+      "  di registry                     print the distribution catalog (JSON)",
+      "  di build-site [--out <dir>]     generate the static catalog site (default site/)",
       "  di new-skill <cat> <name>       scaffold a new skill (--core for core scope)",
       "",
       "Zero dependencies — requires only Node >= 18.",

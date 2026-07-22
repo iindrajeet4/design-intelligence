@@ -27,7 +27,8 @@ Implement → Review → Detect problems → Improve   (review engine, critique 
 | **Reasoning engines** | `engine/` | The decision, generation, and review *procedures* an agent executes — every recommendation explained with reasoning, confidence, tradeoffs, alternatives |
 | **Retrieval index** | `index/skill-index.json` | Compiled from frontmatter; agents filter this instead of reading the repo |
 | **Contracts** | `schemas/` | JSON Schema for skills, knowledge objects, and project contexts — CI-enforced |
-| **Tooling** | `tools/` | Zero-dependency CLI: validate, build-index, search, recommend, review |
+| **Tooling** | `tools/` | Zero-dependency CLI (validate, build-index, search, recommend, review, tokens, explain, graph, stats, quality, certify, new-skill) + a stdio **MCP server** |
+| **Catalog + registry** | `tools/di.mjs build-site` | A browsable, searchable static site + machine `registry.json`, auto-deployed to **GitHub Pages** (enable Settings → Pages → Source: GitHub Actions) |
 
 ## Quick start
 

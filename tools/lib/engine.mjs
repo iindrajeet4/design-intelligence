@@ -407,6 +407,29 @@ ${block(dark)}
   return { brand: accent.name, density, dtcg, css };
 }
 
+// ---------- registry (distribution catalog) ----------
+
+export function buildRegistry() {
+  const q6 = ["evidence", "clarity", "implementation", "accessibility", "reusability", "maintainability"];
+  const skills = skillFiles().map((f) => {
+    const d = parseFrontmatter(fs.readFileSync(f, "utf8")).data;
+    const qv = d.quality ? q6.map((k) => d.quality[k]).filter((n) => typeof n === "number") : [];
+    return {
+      id: d.id, name: d.name, category: d.category, description: d.description,
+      version: d.version || null, status: d.status, priority: d.priority || null, complexity: d.complexity || null,
+      platforms: d.applies_to?.platforms || [], product_types: d.applies_to?.product_types || [],
+      tags: d.tags || [], knowledge: d.knowledge || [],
+      quality_overall: qv.length ? Number((qv.reduce((a, b) => a + b, 0) / qv.length).toFixed(2)) : null,
+      path: rel(f),
+    };
+  }).sort((a, b) => (a.id > b.id ? 1 : -1));
+  const knowledge = knowledgeFiles().map((f) => {
+    const d = parseFrontmatter(fs.readFileSync(f, "utf8")).data;
+    return { id: d.id, type: d.type, name: d.name, summary: d.summary, status: d.status, tags: d.tags || [], path: rel(f) };
+  }).sort((a, b) => (a.id > b.id ? 1 : -1));
+  return { schemaVersion: "0.1", counts: { skills: skills.length, knowledge: knowledge.length }, skills, knowledge };
+}
+
 // ---------- certification (automated gate) ----------
 // The automated half of "certified = validated + reviewed" (see GOVERNANCE.md).
 // Human maintainer review is the other half and is not automatable.
