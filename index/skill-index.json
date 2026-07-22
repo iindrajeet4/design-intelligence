@@ -1,8 +1,8 @@
 {
   "schemaVersion": "0.1",
   "stats": {
-    "skills": 18,
-    "knowledge": 13
+    "skills": 33,
+    "knowledge": 25
   },
   "skills": [
     {
@@ -42,6 +42,103 @@
       "path": "skills/core/accessibility/accessibility-foundations/SKILL.md"
     },
     {
+      "id": "buttons.button-design",
+      "name": "button-design",
+      "category": "buttons",
+      "description": "Design buttons with a clear action hierarchy — one primary per view, distinct secondary and tertiary styles, real semantics, visible focus, and honest labels that say what happens.",
+      "priority": "high",
+      "complexity": "basic",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "marketing",
+        "dashboard"
+      ],
+      "tags": [
+        "buttons",
+        "actions",
+        "hierarchy",
+        "accessibility"
+      ],
+      "knowledge": [
+        "heuristics.primary-action-distinct",
+        "rules.interactive-has-focus-state",
+        "principles.hierarchy-reflects-priority"
+      ],
+      "path": "skills/core/buttons/button-design/SKILL.md"
+    },
+    {
+      "id": "cards.card-design",
+      "name": "card-design",
+      "category": "cards",
+      "description": "Use cards deliberately to group related content — with real hierarchy inside, restrained elevation, and a clear primary action — instead of wrapping everything in a card by reflex.",
+      "priority": "medium",
+      "complexity": "basic",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "dashboard",
+        "marketing"
+      ],
+      "tags": [
+        "cards",
+        "layout",
+        "grouping",
+        "restraint"
+      ],
+      "knowledge": [
+        "principles.clarity-over-decoration",
+        "principles.consistency-reduces-load",
+        "principles.hierarchy-reflects-priority"
+      ],
+      "path": "skills/core/cards/card-design/SKILL.md"
+    },
+    {
+      "id": "charts.data-visualization",
+      "name": "data-visualization",
+      "category": "charts",
+      "description": "Choose the right chart for the question, encode data honestly, and give charts the same care as type — clear hierarchy, accessible colour, direct labels, and non-colour-only meaning.",
+      "priority": "high",
+      "complexity": "advanced",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "enterprise",
+        "dashboard",
+        "analytics"
+      ],
+      "tags": [
+        "charts",
+        "data-viz",
+        "dashboard",
+        "accessibility"
+      ],
+      "knowledge": [
+        "principles.hierarchy-reflects-priority",
+        "rules.contrast-meets-wcag-aa",
+        "principles.clarity-over-decoration"
+      ],
+      "path": "skills/core/charts/data-visualization/SKILL.md"
+    },
+    {
       "id": "color.color-system",
       "name": "color-system",
       "category": "color",
@@ -72,6 +169,69 @@
         "rules.contrast-meets-wcag-aa"
       ],
       "path": "skills/core/color/color-system/SKILL.md"
+    },
+    {
+      "id": "content.ux-writing",
+      "name": "ux-writing",
+      "category": "content",
+      "description": "Write interface copy as design material — in the user's language, active voice, specific and honest — so labels, buttons, and messages guide action instead of decorating it.",
+      "priority": "high",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "marketing",
+        "dashboard"
+      ],
+      "tags": [
+        "content",
+        "microcopy",
+        "ux-writing",
+        "clarity"
+      ],
+      "knowledge": [
+        "heuristics.match-system-and-real-world",
+        "principles.clarity-over-decoration",
+        "principles.feedback-for-every-action"
+      ],
+      "path": "skills/core/content/ux-writing/SKILL.md"
+    },
+    {
+      "id": "conversion.trust-and-conversion",
+      "name": "trust-and-conversion",
+      "category": "conversion",
+      "description": "Design conversion honestly — one clear primary action, reduced friction and cognitive load, visible trust signals, and no dark patterns — so users act because it's easy and safe, not because they're tricked.",
+      "priority": "high",
+      "complexity": "advanced",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile"
+      ],
+      "product_types": [
+        "ecommerce",
+        "saas",
+        "marketing"
+      ],
+      "tags": [
+        "conversion",
+        "trust",
+        "ecommerce",
+        "ethics"
+      ],
+      "knowledge": [
+        "principles.hierarchy-reflects-priority",
+        "heuristics.primary-action-distinct",
+        "anti-patterns.carousel-for-key-content"
+      ],
+      "path": "skills/core/conversion/trust-and-conversion/SKILL.md"
     },
     {
       "id": "dashboard.dashboard-design",
@@ -331,6 +491,162 @@
       "path": "skills/core/layout/layout-foundations/SKILL.md"
     },
     {
+      "id": "lists.pagination-and-lists",
+      "name": "pagination-and-lists",
+      "category": "lists",
+      "description": "Present long collections so users can navigate, return, and sense scope — pagination or load-more for goal-directed lists, position memory, and infinite scroll only for casual feeds.",
+      "priority": "medium",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "dashboard"
+      ],
+      "tags": [
+        "lists",
+        "pagination",
+        "infinite-scroll",
+        "navigation"
+      ],
+      "knowledge": [
+        "anti-patterns.infinite-scroll-for-navigation",
+        "patterns.progressive-disclosure",
+        "heuristics.recognition-over-recall"
+      ],
+      "path": "skills/core/lists/pagination-and-lists/SKILL.md"
+    },
+    {
+      "id": "media.responsive-images",
+      "name": "responsive-images",
+      "category": "media",
+      "description": "Serve images responsibly — right size and format per device, reserved dimensions to prevent layout shift, meaningful alt text, and lazy-loading below the fold.",
+      "priority": "medium",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile"
+      ],
+      "product_types": [
+        "ecommerce",
+        "marketing",
+        "saas",
+        "portfolio"
+      ],
+      "tags": [
+        "images",
+        "media",
+        "performance",
+        "accessibility"
+      ],
+      "knowledge": [
+        "principles.clarity-over-decoration",
+        "rules.contrast-meets-wcag-aa"
+      ],
+      "path": "skills/core/media/responsive-images/SKILL.md"
+    },
+    {
+      "id": "mobile.mobile-patterns",
+      "name": "mobile-patterns",
+      "category": "mobile",
+      "description": "Design for touch and small screens on their own terms — reachable primary actions, generous targets, native inputs and gestures, and prioritised content, not a shrunk desktop layout.",
+      "priority": "high",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "mobile",
+        "web"
+      ],
+      "product_types": [
+        "ecommerce",
+        "saas",
+        "marketing",
+        "enterprise"
+      ],
+      "tags": [
+        "mobile",
+        "touch",
+        "responsive",
+        "ergonomics"
+      ],
+      "knowledge": [
+        "rules.touch-target-min-size",
+        "patterns.progressive-disclosure",
+        "heuristics.recognition-over-recall"
+      ],
+      "path": "skills/core/mobile/mobile-patterns/SKILL.md"
+    },
+    {
+      "id": "modals.dialog-design",
+      "name": "dialog-design",
+      "category": "modals",
+      "description": "Use modal dialogs sparingly and correctly — only for focused interrupting decisions — with proper focus trapping, Escape to close, a labelled dialog, and a mobile-appropriate alternative.",
+      "priority": "high",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "dashboard"
+      ],
+      "tags": [
+        "modals",
+        "dialogs",
+        "focus",
+        "accessibility"
+      ],
+      "knowledge": [
+        "anti-patterns.modal-for-everything",
+        "interactions.keyboard-navigation",
+        "rules.interactive-has-focus-state"
+      ],
+      "path": "skills/core/modals/dialog-design/SKILL.md"
+    },
+    {
+      "id": "motion.motion-and-animation",
+      "name": "motion-and-animation",
+      "category": "motion",
+      "description": "Use motion with purpose — to show relationships, feedback, and continuity — on a small duration/easing scale, always honouring reduced-motion, never as decoration.",
+      "priority": "medium",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "marketing",
+        "dashboard"
+      ],
+      "tags": [
+        "motion",
+        "animation",
+        "tokens",
+        "accessibility"
+      ],
+      "knowledge": [
+        "rules.respect-reduced-motion",
+        "tokens.motion-duration-scale",
+        "principles.clarity-over-decoration"
+      ],
+      "path": "skills/core/motion/motion-and-animation/SKILL.md"
+    },
+    {
       "id": "navigation.navigation-patterns",
       "name": "navigation-patterns",
       "category": "navigation",
@@ -360,6 +676,67 @@
         "decisions.sidebar-when-frequent-switching"
       ],
       "path": "skills/core/navigation/navigation-patterns/SKILL.md"
+    },
+    {
+      "id": "notifications.notifications-and-toasts",
+      "name": "notifications-and-toasts",
+      "category": "notifications",
+      "description": "Communicate events at the right level and urgency — inline confirmation, transient toasts, or persistent alerts — accessibly announced and never used to hide errors that need action.",
+      "priority": "medium",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "dashboard"
+      ],
+      "tags": [
+        "notifications",
+        "toasts",
+        "feedback",
+        "accessibility"
+      ],
+      "knowledge": [
+        "principles.feedback-for-every-action",
+        "rules.contrast-meets-wcag-aa"
+      ],
+      "path": "skills/core/notifications/notifications-and-toasts/SKILL.md"
+    },
+    {
+      "id": "onboarding.first-run-onboarding",
+      "name": "first-run-onboarding",
+      "category": "onboarding",
+      "description": "Get users to their first success fast — show value before setup, teach in context instead of upfront tours, make progress visible, and always allow skip and return.",
+      "priority": "medium",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise"
+      ],
+      "tags": [
+        "onboarding",
+        "first-run",
+        "activation",
+        "empty-states"
+      ],
+      "knowledge": [
+        "principles.hierarchy-reflects-priority",
+        "patterns.progressive-disclosure",
+        "heuristics.recognition-over-recall"
+      ],
+      "path": "skills/core/onboarding/first-run-onboarding/SKILL.md"
     },
     {
       "id": "principles.design-principles",
@@ -425,6 +802,38 @@
         "rules.touch-target-min-size"
       ],
       "path": "skills/core/responsive/responsive-design/SKILL.md"
+    },
+    {
+      "id": "search.search-ux",
+      "name": "search-ux",
+      "category": "search",
+      "description": "Design search that helps users find things — forgiving input, suggestions, fast relevant results, clear filters, and helpful zero-result states — favouring recognition over recall.",
+      "priority": "medium",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "dashboard"
+      ],
+      "tags": [
+        "search",
+        "findability",
+        "filters",
+        "ux"
+      ],
+      "knowledge": [
+        "heuristics.recognition-over-recall",
+        "patterns.progressive-disclosure",
+        "principles.feedback-for-every-action"
+      ],
+      "path": "skills/core/search/search-ux/SKILL.md"
     },
     {
       "id": "spacing.spacing-system",
@@ -545,6 +954,70 @@
       "path": "skills/core/states/loading-states/SKILL.md"
     },
     {
+      "id": "tabs.tabs-and-accordions",
+      "name": "tabs-and-accordions",
+      "category": "tabs",
+      "description": "Organise sectioned content with tabs or accordions chosen by count and screen width, following the ARIA keyboard patterns, with a clear selected/expanded state and no essential content hidden.",
+      "priority": "medium",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "dashboard"
+      ],
+      "tags": [
+        "tabs",
+        "accordion",
+        "disclosure",
+        "accessibility"
+      ],
+      "knowledge": [
+        "decisions.tabs-vs-accordion",
+        "patterns.progressive-disclosure",
+        "interactions.keyboard-navigation"
+      ],
+      "path": "skills/core/tabs/tabs-and-accordions/SKILL.md"
+    },
+    {
+      "id": "theming.dark-mode",
+      "name": "dark-mode",
+      "category": "theming",
+      "description": "Support light and dark themes at the token layer — designed, not inverted — with re-checked contrast, adjusted elevation, and honoured system preference plus an optional toggle.",
+      "priority": "medium",
+      "complexity": "intermediate",
+      "status": "stable",
+      "platforms": [
+        "web",
+        "mobile",
+        "desktop"
+      ],
+      "product_types": [
+        "saas",
+        "ecommerce",
+        "enterprise",
+        "dashboard",
+        "marketing"
+      ],
+      "tags": [
+        "theming",
+        "dark-mode",
+        "tokens",
+        "contrast"
+      ],
+      "knowledge": [
+        "rules.contrast-meets-wcag-aa",
+        "principles.consistency-reduces-load"
+      ],
+      "path": "skills/core/theming/dark-mode/SKILL.md"
+    },
+    {
       "id": "typography.typography-system",
       "name": "typography-system",
       "category": "typography",
@@ -577,6 +1050,32 @@
     }
   ],
   "knowledge": [
+    {
+      "id": "anti-patterns.carousel-for-key-content",
+      "type": "anti-pattern",
+      "name": "Carousels for key content",
+      "summary": "Hiding important content in an auto-rotating carousel buries most of it — users rarely see slides past the first, and motion and controls add friction.",
+      "status": "stable",
+      "tags": [
+        "carousel",
+        "hierarchy",
+        "conversion"
+      ],
+      "path": "knowledge/anti-patterns/carousel-for-key-content.md"
+    },
+    {
+      "id": "anti-patterns.infinite-scroll-for-navigation",
+      "type": "anti-pattern",
+      "name": "Infinite scroll where users need to find and return",
+      "summary": "Infinite scroll breaks the footer, position memory, and \"get back to that item\" — bad for goal-directed lists, even when fine for casual feeds.",
+      "status": "stable",
+      "tags": [
+        "navigation",
+        "lists",
+        "pagination"
+      ],
+      "path": "knowledge/anti-patterns/infinite-scroll-for-navigation.md"
+    },
     {
       "id": "anti-patterns.modal-for-everything",
       "type": "anti-pattern",
@@ -617,6 +1116,32 @@
       "path": "knowledge/decisions/sidebar-when-frequent-switching.md"
     },
     {
+      "id": "decisions.tabs-vs-accordion",
+      "type": "decision",
+      "name": "Tabs vs accordion for sectioned content",
+      "summary": "Use tabs for a few peer sections viewed one at a time on wide screens; use an accordion for many sections or on narrow screens where vertical stacking fits.",
+      "status": "stable",
+      "tags": [
+        "navigation",
+        "disclosure",
+        "layout"
+      ],
+      "path": "knowledge/decisions/tabs-vs-accordion.md"
+    },
+    {
+      "id": "heuristics.match-system-and-real-world",
+      "type": "heuristic",
+      "name": "Match the system to the real world",
+      "summary": "Use the user's language and mental model, not internal system jargon — order information the way people expect it.",
+      "status": "stable",
+      "tags": [
+        "review",
+        "content",
+        "mental-model"
+      ],
+      "path": "knowledge/heuristics/match-system-and-real-world.md"
+    },
+    {
       "id": "heuristics.primary-action-distinct",
       "type": "heuristic",
       "name": "The primary action is visually distinct",
@@ -628,6 +1153,32 @@
         "actions"
       ],
       "path": "knowledge/heuristics/primary-action-distinct.md"
+    },
+    {
+      "id": "heuristics.recognition-over-recall",
+      "type": "heuristic",
+      "name": "Favour recognition over recall",
+      "summary": "Show options, context, and prior choices rather than making users remember them — minimise what the user must hold in their head.",
+      "status": "stable",
+      "tags": [
+        "review",
+        "cognitive-load",
+        "usability"
+      ],
+      "path": "knowledge/heuristics/recognition-over-recall.md"
+    },
+    {
+      "id": "interactions.keyboard-navigation",
+      "type": "interaction",
+      "name": "Keyboard navigation",
+      "summary": "The entire interface must be operable by keyboard alone, in a logical order, with visible focus and standard key conventions.",
+      "status": "stable",
+      "tags": [
+        "accessibility",
+        "keyboard",
+        "interaction"
+      ],
+      "path": "knowledge/interactions/keyboard-navigation.md"
     },
     {
       "id": "patterns.inline-validation",
@@ -643,6 +1194,19 @@
       "path": "knowledge/patterns/inline-validation.md"
     },
     {
+      "id": "patterns.optimistic-ui",
+      "type": "pattern",
+      "name": "Optimistic UI",
+      "summary": "Reflect the likely result of an action immediately, then reconcile with the server — making the interface feel instant while handling failure gracefully.",
+      "status": "stable",
+      "tags": [
+        "feedback",
+        "performance",
+        "state"
+      ],
+      "path": "knowledge/patterns/optimistic-ui.md"
+    },
+    {
       "id": "patterns.progressive-disclosure",
       "type": "pattern",
       "name": "Progressive disclosure",
@@ -655,6 +1219,19 @@
         "navigation"
       ],
       "path": "knowledge/patterns/progressive-disclosure.md"
+    },
+    {
+      "id": "patterns.skeleton-loading",
+      "type": "pattern",
+      "name": "Skeleton loading",
+      "summary": "Show a low-fidelity placeholder that mirrors the coming content's layout, so the wait feels shorter and nothing shifts when data arrives.",
+      "status": "stable",
+      "tags": [
+        "loading",
+        "perceived-performance",
+        "layout"
+      ],
+      "path": "knowledge/patterns/skeleton-loading.md"
     },
     {
       "id": "principles.clarity-over-decoration",
@@ -681,6 +1258,19 @@
         "foundations"
       ],
       "path": "knowledge/principles/consistency-reduces-load.md"
+    },
+    {
+      "id": "principles.feedback-for-every-action",
+      "type": "principle",
+      "name": "Every action gets visible feedback",
+      "summary": "When a user does something, the interface must acknowledge it — a state change, confirmation, or progress — so they are never left wondering whether it worked.",
+      "status": "stable",
+      "tags": [
+        "feedback",
+        "state",
+        "trust"
+      ],
+      "path": "knowledge/principles/feedback-for-every-action.md"
     },
     {
       "id": "principles.hierarchy-reflects-priority",
@@ -735,6 +1325,32 @@
       "path": "knowledge/rules/interactive-has-focus-state.md"
     },
     {
+      "id": "rules.logical-heading-order",
+      "type": "rule",
+      "name": "Headings form a logical outline",
+      "summary": "Use one h1 per page and nest headings without skipping levels, so the document has a meaningful outline for assistive tech and scanning.",
+      "status": "stable",
+      "tags": [
+        "accessibility",
+        "semantics",
+        "hierarchy"
+      ],
+      "path": "knowledge/rules/logical-heading-order.md"
+    },
+    {
+      "id": "rules.respect-reduced-motion",
+      "type": "rule",
+      "name": "Respect reduced-motion preferences",
+      "summary": "Honour the user's reduced-motion setting — disable or soften non-essential animation for people who experience motion discomfort.",
+      "status": "stable",
+      "tags": [
+        "accessibility",
+        "motion",
+        "animation"
+      ],
+      "path": "knowledge/rules/respect-reduced-motion.md"
+    },
+    {
       "id": "rules.touch-target-min-size",
       "type": "rule",
       "name": "Touch targets meet a minimum size",
@@ -746,6 +1362,19 @@
         "touch"
       ],
       "path": "knowledge/rules/touch-target-min-size.md"
+    },
+    {
+      "id": "tokens.motion-duration-scale",
+      "type": "token",
+      "name": "Motion duration scale",
+      "summary": "A small semantic set of motion durations (instant, fast, base, slow) so animation feels consistent and purposeful rather than arbitrary.",
+      "status": "stable",
+      "tags": [
+        "tokens",
+        "motion",
+        "animation"
+      ],
+      "path": "knowledge/tokens/motion-duration-scale.md"
     }
   ]
 }

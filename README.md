@@ -23,7 +23,7 @@ Implement → Review → Detect problems → Improve   (review engine, critique 
 | Layer | Where | What |
 |---|---|---|
 | **Knowledge graph** | `knowledge/` | Atomic, typed objects — principles, patterns, rules, anti-patterns, heuristics, decisions — linked by typed relations (`refines`, `requires`, `conflicts_with`, `resolved_by`, …) |
-| **Skill library** | `skills/` | [Agent Skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) (`SKILL.md`) packaging knowledge into loadable capabilities — 15 seed skills across principles, hierarchy, layout, typography, color, spacing, responsive, accessibility, navigation, forms, states, tables, dashboards |
+| **Skill library** | `skills/` | [Agent Skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) (`SKILL.md`) packaging knowledge into loadable capabilities — 30 skills across foundations (principles, hierarchy, layout, type, color, spacing), platform (responsive, mobile, dark mode), accessibility, and components/patterns (forms, tables, dashboards, buttons, cards, modals, charts, search, states, motion, tabs, lists, media, onboarding, conversion, content) |
 | **Reasoning engines** | `engine/` | The decision, generation, and review *procedures* an agent executes — every recommendation explained with reasoning, confidence, tradeoffs, alternatives |
 | **Retrieval index** | `index/skill-index.json` | Compiled from frontmatter; agents filter this instead of reading the repo |
 | **Contracts** | `schemas/` | JSON Schema for skills, knowledge objects, and project contexts — CI-enforced |
