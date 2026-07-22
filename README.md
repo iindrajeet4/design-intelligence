@@ -82,3 +82,7 @@ Knowledge base → skill system → decision engine → review engine → CLI *(
 ## License
 
 Code: [Apache-2.0](LICENSE) · Knowledge content (`knowledge/`, `skills/`, `engine/`): [CC BY 4.0](LICENSE-CONTENT). Referenced design systems and standards are cited as evidence; no proprietary content is reproduced.
+
+---
+
+From the maker of **[DubeGames](https://dubegames.indrajeetdubeyy.workers.dev/)**.

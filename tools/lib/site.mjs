@@ -3,6 +3,7 @@
 // as JSON). No external requests, so it works from file://, GitHub Pages, or any host.
 
 const REPO = "https://github.com/iindrajeet4/design-intelligence";
+const MAKER_URL = "https://dubegames.indrajeetdubeyy.workers.dev/";
 
 export function renderSite(registry) {
   const data = JSON.stringify(registry).replace(/</g, "\\u003c");
@@ -33,6 +34,8 @@ export function renderSite(registry) {
   h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,4vw,2.8rem);margin:0;letter-spacing:-.01em}
   .sub{color:var(--muted);max-width:60ch;margin:12px 0 0}
   .counts{font-family:var(--mono);font-size:12.5px;color:var(--muted);margin-top:14px}
+  .demo{display:inline-block;font-family:var(--mono);font-size:13px;padding:8px 14px;border:1px solid var(--accent);border-radius:8px;background:var(--accent-bg);text-decoration:none}
+  .demo:hover{background:transparent}
   .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0 6px;position:sticky;top:0;background:var(--ground);padding:12px 0;z-index:5;border-bottom:1px solid var(--line)}
   #q{flex:1;min-width:220px;font-family:var(--sans);font-size:15px;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--ink)}
   #q:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -67,6 +70,7 @@ export function renderSite(registry) {
     <h1>A queryable design brain for AI coding agents</h1>
     <p class="sub">Browse the open skill library and knowledge graph. Each skill packages design knowledge an AI agent can load, apply, and be reviewed against.</p>
     <p class="counts" id="counts"></p>
+    <p style="margin-top:14px"><a class="demo" href="./demo/">▸ See a live demo — a luxury landing page this system generated (scored 100/100)</a></p>
   </header>
 
   <div class="controls">
@@ -80,8 +84,8 @@ export function renderSite(registry) {
   <div class="klist" id="klist"></div>
 
   <footer>
-    Open source · code Apache-2.0 · knowledge CC BY 4.0 ·
-    <a href="${REPO}">${REPO.replace("https://", "")}</a>
+    <p>Open source · code Apache-2.0 · knowledge CC BY 4.0 · <a href="${REPO}">${REPO.replace("https://", "")}</a></p>
+    <p style="margin-top:8px">From the maker of <a href="${MAKER_URL}"><b>DubeGames</b></a></p>
   </footer>
 </div>
 

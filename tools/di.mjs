@@ -116,7 +116,15 @@ switch (cmd) {
     fs.mkdirSync(abs, { recursive: true });
     fs.writeFileSync(path.join(abs, "registry.json"), JSON.stringify(reg, null, 2) + "\n");
     fs.writeFileSync(path.join(abs, "index.html"), renderSite(reg));
-    console.log(`✓ built catalog into ${outDir}/ — ${reg.counts.skills} skills, ${reg.counts.knowledge} knowledge objects (index.html + registry.json)`);
+    // bundle the worked example so it's viewable on the deployed site at /demo/
+    const demoSrc = path.join(ROOT, "examples", "luxury-jewelry", "index.html");
+    let demoNote = "";
+    if (fs.existsSync(demoSrc)) {
+      fs.mkdirSync(path.join(abs, "demo"), { recursive: true });
+      fs.copyFileSync(demoSrc, path.join(abs, "demo", "index.html"));
+      demoNote = " + demo/";
+    }
+    console.log(`✓ built catalog into ${outDir}/ — ${reg.counts.skills} skills, ${reg.counts.knowledge} knowledge objects (index.html + registry.json${demoNote})`);
     break;
   }
 
