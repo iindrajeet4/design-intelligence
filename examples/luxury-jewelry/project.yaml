@@ -1,0 +1,28 @@
+# Demo project context — a fictional luxury jewelry store.
+project_name: Aurelia Fine Jewelry
+product_type: ecommerce
+target_users:
+  - engaged_couples
+  - gift_buyers
+primary_goals:
+  - explore_the_collection
+  - build_trust
+  - purchase
+business_goals:
+  - increase_conversion
+  - premium_positioning
+platform:
+  - web
+  - mobile
+devices:
+  - desktop
+  - tablet
+  - mobile
+brand_personality:
+  - luxury
+  - elegant
+  - trustworthy
+accessibility_target:
+  wcag: AA
+density: low
+conversion_priority: high

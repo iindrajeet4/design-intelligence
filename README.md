@@ -47,6 +47,9 @@ node tools/di.mjs review your-page.html
 node tools/di.mjs validate
 ```
 
+**See it end-to-end:** [`examples/luxury-jewelry/`](examples/luxury-jewelry/) — a full run
+from brief → `recommend` → `tokens` → build → `review`, taking a page from **33 → 100**.
+
 ## Use it in your AI agent
 
 The knowledge is consumed three ways — **Agent Skills** (`SKILL.md`), an **instruction file**
