@@ -1,0 +1,12 @@
+# Default owner for everything
+*                       @iindrajeet4
+
+# Contracts and tooling — changes here affect every consumer
+/schemas/               @iindrajeet4
+/tools/                 @iindrajeet4
+/engine/                @iindrajeet4
+/.github/               @iindrajeet4
+
+# Core knowledge — curated
+/knowledge/             @iindrajeet4
+/skills/core/           @iindrajeet4

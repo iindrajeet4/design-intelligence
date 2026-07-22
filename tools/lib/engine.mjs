@@ -406,3 +406,35 @@ ${block(dark)}
 
   return { brand: accent.name, density, dtcg, css };
 }
+
+// ---------- certification (automated gate) ----------
+// The automated half of "certified = validated + reviewed" (see GOVERNANCE.md).
+// Human maintainer review is the other half and is not automatable.
+
+export function certify(id) {
+  const doc = findById(id);
+  if (!doc) return { id, found: false };
+  const checks = [];
+  const schemaErrors = validate(doc.data, doc.kind === "skill" ? loadSchemas().skill : loadSchemas().knowledge);
+  checks.push({ name: "schema-valid", pass: schemaErrors.length === 0, detail: schemaErrors.length ? schemaErrors.slice(0, 3).join("; ") : "conforms to schema" });
+  checks.push({ name: "has-sources", pass: Array.isArray(doc.data.sources) && doc.data.sources.length > 0, detail: "at least one classified source" });
+  checks.push({ name: "status-not-draft", pass: doc.data.status && doc.data.status !== "draft", detail: `status is "${doc.data.status}"` });
+
+  if (doc.kind === "skill") {
+    const q = doc.data.quality || {};
+    const crit = ["evidence", "clarity", "implementation", "accessibility", "reusability", "maintainability"];
+    checks.push({ name: "has-quality", pass: crit.every((c) => typeof q[c] === "number"), detail: "all six quality criteria scored" });
+    checks.push({ name: "has-validation-rules", pass: Array.isArray(doc.data.validation_rules) && doc.data.validation_rules.length > 0, detail: "declares machine-checkable validation rules" });
+    const body = doc.body || "";
+    const sections = /##\s*Purpose/i.test(body) && /##\s*(Rules|Principles)/i.test(body) && /##\s*Validation/i.test(body);
+    checks.push({ name: "body-sections", pass: sections, detail: "body has Purpose, Rules/Principles, and Validation" });
+  }
+
+  return {
+    id,
+    kind: doc.kind,
+    automated_pass: checks.every((c) => c.pass),
+    note: "Automated gate only — full certification also requires maintainer review (see GOVERNANCE.md).",
+    checks,
+  };
+}

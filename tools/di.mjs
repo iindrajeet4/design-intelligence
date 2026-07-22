@@ -9,7 +9,7 @@ import path from "node:path";
 import {
   validateAll, buildIndex, serializeIndex, indexPath,
   search, recommend, reviewHtml, loadContext,
-  findById, relations, stats, qualityReport, generateTokens, ROOT,
+  findById, relations, stats, qualityReport, generateTokens, certify, ROOT,
 } from "./lib/engine.mjs";
 
 const [cmd, ...rest] = process.argv.slice(2);
@@ -128,6 +128,16 @@ switch (cmd) {
     break;
   }
 
+  case "certify": {
+    const id = positional[0];
+    if (!id) { console.error("usage: di certify <id>"); process.exit(1); }
+    const r = certify(id);
+    if (r.found === false) { console.error(`✗ no skill or knowledge object with id "${id}"`); process.exit(1); }
+    out(r);
+    if (!r.automated_pass) process.exit(1);
+    break;
+  }
+
   case "new-skill": {
     const category = positional[0];
     const name = positional[1];
@@ -198,6 +208,7 @@ TODO related skill ids.
       "  di graph [id]                   show the knowledge relation graph (or one node)",
       "  di stats                        counts by type, category, status, source class",
       "  di quality                      quality-score report across skills",
+      "  di certify <id>                 run the automated certification gate on one item",
       "  di new-skill <cat> <name>       scaffold a new skill (--core for core scope)",
       "",
       "Zero dependencies — requires only Node >= 18.",
